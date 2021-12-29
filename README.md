@@ -11,5 +11,10 @@
 
 + Function
     * Logging
-    * Create a result file (xml format)
+    * Create a result file (json format)
     * Transfer the result to the main server (FTP)
+    
++ Library
+    * BeautifulSoup4 : To parse xml (Event Viewer, Windows Defender, Task Scheduler log file)
+    * Database : Pymssql
+    

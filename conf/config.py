@@ -15,6 +15,9 @@ class Config:
     def ftp_connection(self) -> dict:
         return self.conf["FTP"]
 
+    def server(self) -> dict:
+        return self.conf["Server"]
+
     def socket(self) -> str:
         return self.conf["Socket"]["server"]
 

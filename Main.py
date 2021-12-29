@@ -1,4 +1,6 @@
 from func.file.Logger import Logger
+from collections import defaultdict
+
 l = Logger()
 logger = l.logger
 l.set_handler()
@@ -9,7 +11,13 @@ def decorator(func):
         logger.info(f"{func.__name__.upper()} STARTED")
         func(*args, **kwargs)
         logger.info(f"{func.__name__.upper()} COMPLETED")
+
     return decorated
+
+
+def server():
+    from conf.config import Config
+    return Config().server()
 
 
 class CheckSvr:
@@ -18,7 +26,7 @@ class CheckSvr:
         from func.GetSvrInfo import GetSvrInfo
 
         self.g = GetSvrInfo()
-        self.check_result = "<server></server>"
+        self.check_result = server()
         i = IPHost()
 
         self.hostname, self.ip = i.get_hostname(), i.get_ip()
@@ -27,8 +35,8 @@ class CheckSvr:
             logger.error(f"HOSTNAME: {self.hostname} IP: {self.ip} ---> 일치하는 서버가 없습니다.")
         else:
             logger.info(f"HOSTNAME: {self.hostname} IP: {self.ip}")
-            self.write_data("server", "hostname", self.hostname)
-            self.write_data("server", "ip", self.ip)
+            self.check_result["hostname"] = self.hostname
+            self.check_result["ip"] = self.ip
 
     @decorator
     def disk(self):
@@ -36,11 +44,12 @@ class CheckSvr:
 
         disk_list: list = self.g.get_svr_info(self.svr_id, "disk").split()
         if disk_list:
-            self.write_data("server", "disk")
+            d = defaultdict()
             for letter in disk_list:
                 result: str = Disk(letter).get_disk()
-                self.write_data("disk", letter, result) if result != "NODATA" \
+                d[letter] = result if result != "NODATA" \
                     else logger.error(f"{letter}드라이브 데이터가 없습니다.")
+            self.check_result["disk"] = dict(d)
 
     @decorator
     def resource(self):
@@ -49,8 +58,8 @@ class CheckSvr:
         r = Resource()
         cpu: str = r.cpu if r.cpu else "0"
         mem: str = r.mem if r.mem else "0"
-        self.write_data("server", "cpu", cpu)
-        self.write_data("server", "memory", mem)
+        self.check_result["cpu"] = cpu
+        self.check_result["memory"] = mem
 
     @decorator
     def service(self):
@@ -58,11 +67,12 @@ class CheckSvr:
 
         svc_list: list = self.g.get_svr_info(self.svr_id, "svc").split()
         if svc_list:
-            self.write_data("server", "service")
+            d = defaultdict()
             for svc in svc_list:
                 result: str = Service(svc).get_svc()
-                self.write_data("service", svc, result) if result != "-1" \
+                d[svc] = result if result != "-1" \
                     else logger.error(f"{svc}가 없습니다.")
+            self.check_result["service"] = dict(d)
 
     @decorator
     def event(self):
@@ -70,9 +80,8 @@ class CheckSvr:
 
         event_results: dict = EventLog().get_event()
         if event_results:
-            self.write_data("server", "eventlog")
             for key in event_results.keys():
-                self.write_data("eventlog", key, event_results[key]) if event_results[key] != "FileNotFound" \
+                self.check_result[key] = event_results[key] if event_results[key] != "FileNotFound" \
                     else logger.error("이벤트 로그파일이 없습니다.")
 
     @decorator
@@ -81,11 +90,12 @@ class CheckSvr:
 
         task_list: list = self.g.get_svr_info(self.svr_id, "task").split()
         if task_list:
-            self.write_data("server", "tasklog")
+            d = defaultdict()
             for task in task_list:
                 result: str = Task(task).get_task()
-                self.write_data("tasklog", task, result) if result != "FileNotFound" \
+                d[task] = result if result != "FileNotFound" \
                     else logger.error("작업스케쥴러 로그파일이 없습니다.")
+            self.check_result["task"] = dict(d)
 
     @decorator
     def windows_defender(self):
@@ -93,13 +103,8 @@ class CheckSvr:
 
         if self.g.get_svr_info(self.svr_id, "wdef") == 1:
             result: str = WinDefender().get_wdef()
-            self.write_data("server", "windefender", result) if result != "FileNotFound" \
+            self.check_result["windefender"] = result if result != "FileNotFound" \
                 else logger.error("윈도우 디펜더 로그파일이 없습니다.")
-
-    def write_data(self, parent: str, input: str, string: str = None):
-        from func.file.NewTag import NewTag
-        n = NewTag(self.check_result)
-        self.check_result = n.create(parent, input, string)
 
     def to_data_file(self, flag: str):
         from func.file.DataFile import DataFile

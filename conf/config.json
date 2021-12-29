@@ -11,6 +11,21 @@
     "id": "IMDEV",
     "password": "tyvldim?!"
   },
+  "Server": {
+    "hostname": "",
+    "ip": "",
+    "disk": {},
+    "cpu": "",
+    "memory": "",
+    "service": {},
+    "eventlog": {
+      "app": "",
+      "security": "",
+      "system": ""
+    },
+    "task": {},
+    "windefender": ""
+  },
   "Event": {
     "path": ["C:\\Windows\\System32\\winevt\\Logs\\Application.evtx", "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx",
       "C:\\Windows\\System32\\winevt\\Logs\\System.evtx"]

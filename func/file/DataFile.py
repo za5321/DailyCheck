@@ -23,9 +23,9 @@ class DataFile:
         else:
             return True
 
-    def create(self, data: str):
+    def create(self, data: dict):
         f = open(f"{self.path}{self.filename}", mode='wt', encoding='UTF-8')
-        f.write(data.replace("&lt;", "<").replace("&gt;", ">"))
+        f.write(str(data))
         f.close()
 
     def delete(self):
