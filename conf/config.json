@@ -7,7 +7,7 @@
   },
   "FTP": {
     "ip": "ip",
-    "port": port,
+    "port": 0,
     "id": "id",
     "password": "password"
   },
