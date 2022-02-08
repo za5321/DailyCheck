@@ -13,7 +13,7 @@ DailyCheck is for you if you want to __check status of Windows Server__ without 
 * Windows Event Viewer
 
 📝 DailyCheck can also:<br/>
-* __Log__ monitoring results into log file (__json__)
+* __Log__ monitoring results into log file (__xml__)
 * __Transfer__ the log to the main server (__FTP__)
     
 🔧 Before using DailyCheck, you should install:<br/>
