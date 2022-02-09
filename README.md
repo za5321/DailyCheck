@@ -20,7 +20,13 @@ DailyCheck is for you if you want to __check status of Windows Server__ without 
 * BeautifulSoup4: To parse xml<br/>(Event Viewer, Windows Defender, Task Scheduler logs are written in xml format.)<br/>
 `pip install beautifulsoup4`
 
-* Pymssql: I've used SQL Server (MS-SQL), version 2019.<br/>
+* Pymssql: Database - SQL Server (MS-SQL) 2019.<br/>
 `pip install beautifulsoup4`
 
 🔧 How to execute DailyCheck:<br/>
+>   1. Install Pyinstaller - It helps build python project into exe file easily.<br/>
+    `pip install pyinstaller`
+>   2.  Type the command line below. <br/>
+    `pyinstaller --onefile --add-data=conf\*;conf --name daily_check Main.py`<br/>
+    These options are:<br/>
+    --onefile: Should you need a neat single exe file, this option 
