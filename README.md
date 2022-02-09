@@ -24,3 +24,9 @@ DailyCheck is for you if you want to __check status of Windows Server__ without 
 `pip install beautifulsoup4`
 
 🔧 How to execute DailyCheck:<br/>
+>   1. Install Pyinstaller - It helps build python project into exe file easily.<br/>
+    `pip install pyinstaller`
+>   2.  Type the command line below. <br/>
+    `pyinstaller --onefile --add-data=conf\*;conf --name daily_check Main.py`<br/>
+    These options are:<br/>
+    --onefile: Should you need a neat single exe file, this option 
