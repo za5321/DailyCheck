@@ -81,7 +81,7 @@ class CheckSvr:
         event_results: dict = EventLog().get_event()
         if event_results:
             for key in event_results.keys():
-                self.check_result[key] = event_results[key] if event_results[key] != "FileNotFound" \
+                self.check_result["eventlog"][key] = event_results[key] if event_results[key] != "FileNotFound" \
                     else logger.error("이벤트 로그파일이 없습니다.")
 
     @decorator
