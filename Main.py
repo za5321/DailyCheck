@@ -15,7 +15,7 @@ def decorator(func):
     return decorated
 
 
-def server():
+def server() -> dict:
     from conf.config import Config
     return Config().server()
 
@@ -26,7 +26,7 @@ class CheckSvr:
         from func.GetSvrInfo import GetSvrInfo
 
         self.g = GetSvrInfo()
-        self.check_result = server()
+        self.check_result: dict = server()
         i = IPHost()
 
         self.hostname, self.ip = i.get_hostname(), i.get_ip()
@@ -108,11 +108,13 @@ class CheckSvr:
 
     def to_data_file(self, flag: str):
         from func.file.DataFile import DataFile
+        import json
+
         w = DataFile(self.hostname)
 
         if flag == "create":
             w.delete() if w.is_file() else None
-            w.create(self.check_result)
+            w.create(json.dumps(self.check_result))
             logger.info("데이터 파일을 생성했습니다.")
             return
         elif flag == "send":
