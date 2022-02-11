@@ -16,10 +16,9 @@ DailyCheck is for you if you want to __check status of Windows Server__ without 
 * __Log__ monitoring results into log file (__json__)
 * __Transfer__ the log to the main server (__FTP__)
     
-🔧 Before using DailyCheck, you should install:<br/>
+🔧 For the project DailyCheck, you should install:<br/>
 * BeautifulSoup4: To parse xml<br/>(Event Viewer, Windows Defender, Task Scheduler logs are written in xml format.)<br/>
 `pip install beautifulsoup4`
-
 * Pymssql: Database - SQL Server (MS-SQL) 2019.<br/>
 `pip install beautifulsoup4`
 
@@ -29,4 +28,7 @@ DailyCheck is for you if you want to __check status of Windows Server__ without 
 >   2.  Type the command line below. <br/>
     `pyinstaller --onefile --add-data=conf\*;conf --name daily_check Main.py`<br/>
     These options are:<br/>
-    --onefile: Should you need a neat single exe file, this option 
+    --onefile: Should you need a neat single exe file, this option is going to help you.<br/>
+    --add-data: The option must be added in order to apply configuration to your executable program.<br/>
+    --name: You can set the name of exe file.<br/>
+>   3. After building, you can find **_'daily_check.exe'_** at **_'dist'_** folder.
