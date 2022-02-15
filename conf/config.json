@@ -1,15 +1,15 @@
 {
   "Database": {
-    "ip": "10.44.1.45:5881",
-    "id": "ima",
-    "password": "tyvldim?!0",
-    "name": "DailyCheck"
+    "ip": "ip, port",
+    "id": "id",
+    "password": "password",
+    "name": "name"
   },
   "FTP": {
-    "ip": "10.44.1.45",
-    "port": 824,
-    "id": "IMDEV",
-    "password": "tyvldim?!"
+    "ip": "ip",
+    "port": 0,
+    "id": "id",
+    "password": "password"
   },
   "Server": {
     "hostname": "",
