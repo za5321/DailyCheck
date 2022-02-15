@@ -20,7 +20,7 @@ DailyCheck is for you if you want to __check status of Windows Server__ without 
 🔧 For the project DailyCheck, you should install (I also offer _requirements.txt_):<br/>
 * BeautifulSoup4: To parse xml<br/>(Event Viewer, Windows Defender, Task Scheduler logs are written in xml format.)<br/>
 `pip install beautifulsoup4`
-* Pymssql: Database - SQL Server (MS-SQL) 2019.<br/>
+* Pymssql: To connect Database - SQL Server (MS-SQL). My MS-SQL version is 2019.<br/>
 `pip install pymssql`
 
 🔧 How to execute DailyCheck:<br/>
@@ -39,5 +39,5 @@ DailyCheck is for you if you want to __check status of Windows Server__ without 
 >   1. Run **_Windows Task Scheduler_**
 >   2. Open _'Create Task'_ and set _'General'_ and _'Triggers'_.
 >   3. Go to _'Actions'_ and create new.
->   4. Add _DailyCheck_ to the _'Program/Script'_.
+>   4. Add _daily_check_ to the _'Program/Script'_.
 
