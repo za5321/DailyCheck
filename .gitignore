@@ -1,4 +1,5 @@
 .idea/
+dist/
 build/
 log/
 conf/config.json
