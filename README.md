@@ -14,7 +14,7 @@ DailyCheck is for you if you want to __check status of Windows Server__ without 
 * Windows Event Viewer
 
 📝 DailyCheck can also:<br/>
-* __Log__ monitoring results (__json__)
+* __Log__ monitoring results (__JSON__)
 * __Transfer__ the result file to the main server (__FTP__)
     
 🔧 For the project DailyCheck, you should install (I also offer _requirements.txt_):<br/>
