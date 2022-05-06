@@ -13,7 +13,7 @@ class EventLog:
     def get_event(self) -> dict:
         files: list = self.config()
         for i, file in enumerate(files):
-            text = "app" if i == 0 else "secu" if i == 1 else "sys" if i == 2 else ""
+            text = ["app", "secu", "sys"][i]
             self.results[text] = self.check_event(file)
         return self.results
 
