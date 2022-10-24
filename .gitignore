@@ -1,5 +1,6 @@
 .idea/
 dist/
+dist_경지/
 build/
 log/
 conf/config.json

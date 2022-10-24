@@ -42,7 +42,7 @@ class CheckSvr:
     def disk(self):
         from func.check.Disk import Disk
 
-        disk_list: list = self.g.get_svr_info(self.svr_id, "disk").split()
+        disk_list: list = self.g.get_svr_info(self.svr_id, "disk")
         if disk_list:
             d = defaultdict()
             for letter in disk_list:
@@ -65,7 +65,7 @@ class CheckSvr:
     def service(self):
         from func.check.Service import Service
 
-        svc_list: list = self.g.get_svr_info(self.svr_id, "svc").split()
+        svc_list: list = self.g.get_svr_info(self.svr_id, "svc")
         if svc_list:
             d = defaultdict()
             for svc in svc_list:
@@ -88,7 +88,7 @@ class CheckSvr:
     def task(self):
         from func.check.Task import Task
 
-        task_list: list = self.g.get_svr_info(self.svr_id, "task").split()
+        task_list: list = self.g.get_svr_info(self.svr_id, "task")
         if task_list:
             d = defaultdict()
             for task in task_list:
@@ -101,7 +101,7 @@ class CheckSvr:
     def windows_defender(self):
         from func.check.WinDefender import WinDefender
 
-        if self.g.get_svr_info(self.svr_id, "wdef") == 1:
+        if self.g.get_svr_info(self.svr_id, "wdef")[0] == 1:
             result: str = WinDefender().get_wdef()
             self.check_result["windefender"] = result if result != "FileNotFound" \
                 else logger.error("윈도우 디펜더 로그파일이 없습니다.")

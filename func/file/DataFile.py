@@ -1,4 +1,5 @@
 import datetime
+import os
 
 
 class DataFile:
@@ -6,9 +7,9 @@ class DataFile:
         from func.file.Logger import Logger
         self.logger = Logger().logger
 
-        self.date = datetime.datetime.today().date()
+        date = datetime.datetime.today().date()
         self.path = "C:\\DailyCheck\\"
-        self.filename = f"daily_check_{str(self.date)}_{hostname}.log"
+        self.filename = f"daily_check_{str(date)}_{hostname}.log"
 
     @staticmethod
     def config():
@@ -16,6 +17,8 @@ class DataFile:
         return Config().ftp_connection()
 
     def is_file(self) -> bool:
+        if not os.path.exists(self.path):
+            os.mkdir(self.path)
         try:
             open(f"{self.path}{self.filename}", 'rb')
         except FileNotFoundError:
@@ -29,12 +32,10 @@ class DataFile:
         f.close()
 
     def delete(self):
-        import os
         os.remove(f"{self.path}{self.filename}")
 
     def send(self) -> bool:
         import ftplib
-        import os
 
         con: dict = self.config()
         ftp = ftplib.FTP()
